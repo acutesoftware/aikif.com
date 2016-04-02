@@ -1,0 +1,193 @@
+
+
+/*'--------------------------
+Layout of the web page
+-----------------------------*/
+
+body {
+  text-align: left;
+  font-size: 100%;
+  font-family: arial, helvetica, sans-serif;
+  }
+
+#container {
+  margin: 0 auto;
+  width: 1100px;
+  text-align: left;
+  }
+
+#logo
+{
+   background: #fff;
+   padding: 0px;
+   position   :absolute;
+   top: 30px;
+   left: 35px;
+   border: 0;
+   
+}
+
+#header
+{
+   background: #fff;
+   padding: 0px;
+   font-size: 270%; 
+font-family: Goudy Old Style,  serif;
+text-decoration: none; 
+   position   :absolute;
+   top: 40px;
+   left: 215px;
+
+}
+
+
+#header h1 { margin: 50; }
+
+#top-navigation
+{
+ position   :absolute;
+   top: 50px;
+   left:210px;
+   width: 640px;
+   background: #fff;
+	padding: 20px;
+}
+
+#top-navigation ul
+{
+   margin: 0;
+   padding: 0 ;
+}
+
+#top-navigation ul li
+{
+   list-style-type: none;
+   display: inline;
+}
+
+#top-navigation li a
+{
+   display: inline;
+   float: left;
+   padding: 5px 15px;
+   color: #060;
+   text-decoration: none;
+}
+
+#top-navigation li a:hover { background: #383; }
+
+
+#side-navigation {
+   position   :absolute;
+   top: 130px;
+   left: 0px;
+   width: 190px;
+   padding: 0px 0px 0px 0px ;
+   margin: 0 0px;
+   display: inline;
+   background: #ccc;
+   background: #fff;
+   border-right: 0px solid #000;
+}
+
+
+
+#side-navigation  a:hover { font-weight:bold; }
+
+
+#CurrentMenu a { background: #fff; text-decoration: none;  font-color: #fff; font-weight:bold;
+
+}
+
+
+
+
+
+#side-navigation ul {    list-style: none;
+}
+
+
+
+#submenu {     margin-left: -20px   
+}
+
+
+
+#searchbox
+{
+
+   position   :absolute;
+   top: 460px;
+   left: 10px;
+   width: 160px;
+   padding: 5px 10px 5px 0px ;
+   margin: 0 0px;
+   display: inline;
+   text-indent: 15px;
+   background: #fff;
+   text-decoration: none;
+  }
+
+
+
+
+#content
+{
+   text-align:left;
+   position   :absolute;
+   top: 120px;
+   left: 180px;
+   padding: 20px ;
+   margin: 0px 40px 20px 20px;
+   border: 0px solid #000;
+}
+
+
+
+#content h2 { 
+margin: 0;
+font-family: Goudy Old Style,  serif;
+font-size: 200%;
+text-decoration: none;
+
+}
+
+#aside
+{
+   width: 180px;
+   float: right;
+   padding: 0px ;
+  margin: 0px 0px 0px 60px;
+   border: 0px solid #3c3;
+   text-decoration: none;
+   font-size: smaller; 
+
+}
+
+#aside h3 { margin: 0; }
+
+#content-yellowbox
+{
+  width: 150px;
+  float: right;
+  padding: 12px;
+  margin: 0px 10px 10px 10px;
+  background: #FFFFE0;
+  border: 2px solid #000;
+
+}
+
+
+#footer
+{
+   clear: left;
+   background: #fff;
+   border: 0px solid #3c3;
+   text-align: left;
+   padding: 10px;
+   font-size: smaller;
+   color: grey;
+   
+
+}
+
