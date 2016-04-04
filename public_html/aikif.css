@@ -14,7 +14,7 @@ body {
 
 #menu_list a {
     text-decoration: none;
-    letter-spacing:0px;
+    letter-spacing:2px;
 }
 
 #menu_list a:hover {
@@ -32,10 +32,9 @@ Layout display: inline;
 
 body {  text-align: left;  }
 
-#header {  align: center;   width: 100%;}
-
-#hdr_title  { display: inline;  align: left; }
-#hdr_notification {display: inline;  align: right; }
+#header { float: centre; align: center; width: 100%; height: 25px;}
+#hdr_title  { display: inline;  float: left; }
+#hdr_notification {display: inline;  float: right; }
 
 /*-------------- mainMenu (currently Top menu)  ----------*/ 
 #menu_list li {
@@ -46,13 +45,19 @@ body {  text-align: left;  }
     padding: 0px 20px 0px 0px;
 }
 
-#top_menu a { padding: 10px 10px 10px 10px; }
+--#menu { height: 26px; float: left;}
 
+#top_menu li { padding: 10px ; }
+#top_menu_sel li { padding: 10px; }
+
+#top_menu a { float: centre; padding: 10px 10px 10px 10px; }
+#top_menu_sel a { float: centre;  }
 
 
 #search
 {
-   display: inline;
+   display: inline; padding: 0px 20px 0px 0px;
+   float: left;
    text-decoration: none;
 }
 
@@ -72,29 +77,17 @@ body {  text-align: left;  }
 /*--------------------------------
 Colour
 ----------------------------------*/
-body {
-  background-color: white;
-  color: black; 
-}
-
-#header {
-  background-color: red;
-  color: white; 
-}
-
+body                { background-color: white;  color: black; }
+#header             { background: red;  background-color: red;    color: white; }
+#hdr_title          { background-color: red;    color: white; }
+#hdr_notification   { background-color: grey;    color: red; }
+#top_menu           { background-color: red;    color: white; }
+#top_menu_sel a     { background-color: red;  color: yellow; }
+ 
 #footer {
    background: #fff;
    border: 0px solid #3c3;
    color: grey;
 }
 
-
-
-#top_menu  {color: white;
-    background: red;
-}
-    
-#top_menu_selected a {
-    background: white;
-    color: black; 
-}
+   
