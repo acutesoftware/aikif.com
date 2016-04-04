@@ -1,44 +1,38 @@
 <HTML><HEAD><title>AIKIF:Home</title>
-
-<META  name="keywords" content="Artificial Intelligence, Knowledge, Framework, Python, acute software, AI, AGI, AIKIF">
-
-
-<link rel="stylesheet" type="text/css" href="aikif-mobile.css" media="handheld" /> 
+<META name="keywords" content="Artificial Intelligence Knowledge Information Framework, AI, Python, acute software, AIKIF">
+<link rel="stylesheet" type="text/css" href="aikif-mobile.css" media="only screen and (max-device-width:480px)" /> 
 <link rel="stylesheet" type="text/css" href="aikif.css" media="Screen" />
-
 </HEAD><BODY>
-
 <div id="container">
-<!-------- Header starts here ---------------------------------->
 
+<!-- Header -->
 <div id="header" >
     <div id="hdr_title" >AIKIF: Home</div>
     <div id="hdr_notification" >1 of 5</div>
+
+    <!-- Home Menu -->
+    <div id="menu">
+      <UL id = "menu_list">
+        <LI id="top_menu_selected"><A HREF="index.html">Home</a></LI>
+        <LI id="top_menu"><A HREF="tools.html">Tools</A></LI>
+        <LI id="top_menu"><A HREF="logs.html">Logs</A></LI>
+        <LI id="top_menu"><A HREF="edit.html">Edit</A></LI>
+        <LI id="top_menu"><A HREF="rank.html">Rank</A></LI>
+        <LI id="top_menu"><A HREF="about.html">About</A></LI>
+      </UL>
+    </div>
+
+    <!-- Search box -->
+    <div id="search">
+        <form action="." method="POST">
+          <input type="text" name="search_text">
+          <input type="submit" name="my-form" value="Search">
+        </form>
+    </div>
 </div>
 
-<!-------- Home Menu ---------------------------------->
 
-<div id="home_menu">
-  <UL>
-    <LI><A HREF="index.html">Home</a></LI>
-    <LI><A HREF="tools.html">Tools</A></LI>
-    <LI><A HREF="logs.html">Logs</A></LI>
-    <LI><A HREF="edit.html">Edit</A></LI>
-    <LI><A HREF="rank.html">Rank</A></LI>
-  </UL>
-</div>
-
-
-<!-------- Search box (note google search spammed so no longer works) here ---------------------------------->
-<div id="searchbox">
-    <form action="." method="POST">
-      <input type="text" name="search_text">
-      <input type="submit" name="my-form" value="Search">
-    </form>
-</div>
-
-
-<!--------Main Content starts here ---------------------------------->
+<!-- Main Content starts here -->
 
 <DIV id="content">
 
@@ -61,6 +55,7 @@ structures and modules are in a frequently evolving state.
 <BR><BR>
 
 <BR><BR><BR>
+</div>
 
 <!---FOOTER-->
 <DIV id="footer">
@@ -68,7 +63,7 @@ structures and modules are in a frequently evolving state.
     Comments and Questions welcome <a href=mailto:djmurray@acutesoftware.com.au>here</a><BR>
 </div>
 
-</div>
+
 
 </BODY></HTML>
 
