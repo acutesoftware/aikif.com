@@ -1,0 +1,42 @@
+<HTML><HEAD>
+<title>AIKIF:Agents</title>
+<!-- Stylesheets for responsive design -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="/static/aikif.css" media="screen" />
+<link rel="stylesheet" href="/static/aikif_mob.css" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">
+</HEAD>
+<body>
+<div id = "container">
+   <div id = "header">
+   <!-- Banner -->
+   <img src = "/static/aikif_banner.jpg" alt="AIKIF Banner"/>
+   <ul id = "menu_list">
+      <LI id="top_menu"><a href=/>Home</a></li>
+      <LI id="top_menu"><a href=/todo>Todo</a></li>
+      <LI id="top_menu"><a href=/data>Data</a></li>
+      <LI id="top_menu_selected"><a href=/agents>Agents</a></li>
+      <LI id="top_menu"><a href=/programs>Programs</a></li>
+      <LI id="top_menu"><a href=/about>About</a></li>
+    </ul>
+    </div>
+
+<H1>AIKIF Agents</H1>
+<H4>Describes the agents capabilities, and last run status</H4>
+<p>Page to show agents currently setup in AIKIF.</p><p>Modify run_agents.py to update agent list.</p><BR><BR><TABLE width=100% border=0><TR>
+<TD><p>file:</p></TD><TD><p>/home/acutesoftware/.virtualenvs/myvirtualenv/lib/python3.4/site-packages/aikif/agents\gather\log_browser_history.py</p></TD><TD><p>name:</p></TD><TD><p>Browser history</p></TD><TD><p>schedule_type:</p></TD><TD><p>week</p></TD></TR>
+<TR>
+<TD><p>file:</p></TD><TD><p>/home/acutesoftware/.virtualenvs/myvirtualenv/lib/python3.4/site-packages/aikif/agents\gather\log_PC_usage.py</p></TD><TD><p>name:</p></TD><TD><p>PC Usage</p></TD><TD><p>schedule_type:</p></TD><TD><p>minute</p></TD></TR>
+<TR>
+<TD><p>file:</p></TD><TD><p>/home/acutesoftware/.virtualenvs/myvirtualenv/lib/python3.4/site-packages/aikif/agents\aggregate\load_PC_usage.py</p></TD><TD><p>name:</p></TD><TD><p>Aggregate PC usage</p></TD><TD><p>schedule_type:</p></TD><TD><p>hour</p></TD></TR>
+<TR>
+<TD><p>file:</p></TD><TD><p>/home/acutesoftware/.virtualenvs/myvirtualenv/lib/python3.4/site-packages/aikif/agents\gather\agent_filelist.py</p></TD><TD><p>name:</p></TD><TD><p>File Usage</p></TD><TD><p>schedule_type:</p></TD><TD><p>minute</p></TD></TR>
+<TR>
+<TD><p>file:</p></TD><TD><p>/home/acutesoftware/.virtualenvs/myvirtualenv/lib/python3.4/site-packages/aikif/agents\aggregate\agg_context.py</p></TD><TD><p>name:</p></TD><TD><p>Aggregate Context</p></TD><TD><p>schedule_type:</p></TD><TD><p>hour</p></TD></TR>
+</TABLE>
+
+
+
+<BR><BR><BR>
+<div id="footer">
+{{ footer }}
+</div></BODY></HTML>
