@@ -51,7 +51,7 @@ app.config.update(dict(
 
 #os.environ['FLASK_APP'] = 'aikif.py'
 os.environ['FLASK_APP'] = "aikif.py"
-#app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
 def connect_db():
