@@ -93,6 +93,7 @@ def close_db(error):
 #flask initdb
 #Initialized the database.
   
+# not working 
 initdb_command()  
   
     
