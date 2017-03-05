@@ -1,0 +1,27 @@
+<HTML><HEAD>
+    {% if title %}
+    <title>AIKIF - {{ title }}</title>
+    {% else %}
+    <title>AIKIF Home</title>
+    {% endif %}
+<!-- Stylesheets for responsive design -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="/static/aikif.css" media="screen" />
+<link rel="stylesheet" href="/static/aikif_mob.css" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">
+</HEAD>
+<body>
+<div id = "container">
+   <div id = "header">
+   <!-- Banner -->
+   <img src = "/static/aikif_banner.jpg" alt="AIKIF Banner"/>
+  
+    {% block content %}{% endblock %}
+
+
+<BR><BR><BR>
+
+<div id="footer">
+{{ footer }}
+</div></div></BODY></HTML>
+    
+    
