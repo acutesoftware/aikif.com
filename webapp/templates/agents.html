@@ -1,16 +1,7 @@
-<HTML><HEAD>
-<title>AIKIF:Agents</title>
-<!-- Stylesheets for responsive design -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="/static/aikif.css" media="screen" />
-<link rel="stylesheet" href="/static/aikif_mob.css" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">
-</HEAD>
-<body>
-<div id = "container">
-   <div id = "header">
-   <!-- Banner -->
-   <img src = "/static/aikif_banner.jpg" alt="AIKIF Banner"/>
-   <ul id = "menu_list">
+{% extends "base.html" %}
+{% block content %}
+   
+    <ul id = "menu_list">
       <LI id="top_menu"><a href=/>Home</a></li>
       <LI id="top_menu"><a href=/data>Data</a></li>
       <LI id="top_menu_selected"><a href=/agents>Agents</a></li>
@@ -22,17 +13,13 @@
 <H1>AIKIF Agents</H1>
 <H4>Describes the agents capabilities, and last run status</H4>
 <select name="agents" multiple="multiple">
-    <option>Agent:test_agent_number_685848
-</option>
-    <option>AgentInterfaceEnv:Agent Enviroment Interface
-</option>
-    <option>AgentInterfaceWindows:Windows Interface
-</option>
-    <option>ExploreAgent:TEST - exploring_agent
-</option>
-    <option>PCUsageAgent:PCUsage
-</option>
+
+{% for agent in agents %}
+    <option>{{ agent }}</option>
+    {% endfor %}
+
 </select>
+
 <H3>Agents<H3><form action="/agents" method="POST">
   updating id:001
 <BR>  <input type="hidden" name="rec_id" readonly value="001">   <TABLE width=80% valign=top border=1>  <TR>
@@ -56,8 +43,4 @@
 
 
 
-
-<BR><BR><BR>
-<div id="footer">
-{{ footer }}
-</div></BODY></HTML>
+{% endblock %}
