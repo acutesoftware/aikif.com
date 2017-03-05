@@ -146,10 +146,28 @@ def page_data_show(dataFile):
 @app.route("/agents")
 def page_agents():
     return render_template('agents.html',
+                           agents=get_agents(),
                            footer=get_footer())
 
 
 
+def get_agents():
+    """
+    return the list of agents
+    """
+    res = ['AgentInterfaceEnv:Agent Enviroment Interface',
+    'AgentInterfaceWindows:Windows Interface',
+    'Hard coded Test'
+    ]
+
+    
+    #with open(os.path.join(os.getcwd(), 'list_agent_names.txt'), 'r') as f:
+    #    for line in f:
+    #        if line != '':
+    #            res.append(line)
+    
+    return res
+                           
 @app.route("/agents", methods=['POST'])
 def edit_agents():
     res = ''
