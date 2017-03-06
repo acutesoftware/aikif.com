@@ -10,12 +10,42 @@
     </div>
 
 <H1>AIKIF Data</H1>
-<H4>Shows the available data sets for AIKIF</H4>
 <div id="content">
+<H4>Core Data</H4>
 
-this is the list of data
-
+<div id="data_list">
+{% for d in data %}
+    <option>{{ d }}</option>
+    {% endfor %}
 </div>
 
+<div id="add_data">
+<H4>Add Data Item</H4>
+
+<form action="/data" method="POST">
+<BR>  <input type="hidden" name="rec_id" readonly value="001">   <TABLE width=80% valign=top border=1>  <TR>
+    <TD><div id="form_label">Core Data</div></TD>
+    <TD><div id="form_input">
+    <select name="col_0">
+{% for d in data %}
+    <option>{{ d }}</option>
+    {% endfor %}
+
+</select></div></TD>
+  </TR>
+  <TR>
+    <TD><div id="form_label">Name</div></TD>
+    <TD><div id="form_input"><input type="text" name="col_1"></div></TD>
+  </TR>
+  <TR>
+    <TD><div id="form_label">Params</div></TD>
+    <TD><div id="form_input"><input type="text" name="col_2"></div></TD>
+  </TR>
+  <TR><TD></TD>
+  <TD>
+    <input type="submit" name="add-data" value="Add">
+  </TD></TR></TABLE></form>
+
+</div>
 
 {% endblock %}
