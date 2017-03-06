@@ -20,7 +20,9 @@
 
 </select>
 
-<H3>Agents<H3><form action="/agents" method="POST">
+<H3>Agents</H3>
+
+<form action="/agents" method="POST">
   updating id:001
 <BR>  <input type="hidden" name="rec_id" readonly value="001">   <TABLE width=80% valign=top border=1>  <TR>
     <TD><div id="form_label">Agent Name</div></TD>
@@ -40,7 +42,5 @@
     <input type="submit" name="delete-form" value="Delete">
     <input type="submit" name="add-form" value="Add">
   </TD></TR></TABLE></form>
-
-
 
 {% endblock %}
