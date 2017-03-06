@@ -137,7 +137,7 @@ def page_data():
                            footer=get_footer())
 
 def get_data_list():
-    return ['file1','object56', 'scenario 45']
+    return core_data.core_data_types
     
 
 @app.route("/data", methods=['POST'])
