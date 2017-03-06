@@ -21,7 +21,10 @@ from flask import url_for
 from flask import abort
 from flask import flash   
    
+from aikif import core_data   
    
+   
+print('core_data.core_data_types = ', core_data.core_data_types)   
    
 import sqlite3
    
@@ -50,7 +53,7 @@ app.config.update(dict(
 ))
 
 #os.environ['FLASK_APP'] = 'aikif.py'
-os.environ['FLASK_APP'] = "aikif.py"
+os.environ['FLASK_APP'] = "aikif_web.py"
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
@@ -130,9 +133,35 @@ def _search(search_text):
 @app.route("/data")
 def page_data():
     return render_template('data.html',
+                           data=get_data_list(),
                            footer=get_footer())
 
+def get_data_list():
+    return ['file1','object56', 'scenario 45']
+    
 
+@app.route("/data", methods=['POST'])
+def add_data():
+    res = ''
+    editedinfo = []
+    for i in range(0,3):
+        editedinfo.append(request.form['col_' + str(i)])
+        
+    #print('update-form ',   request.form['update-form'] )
+    #print('add-form ',   request.form['add-form'] )
+    #print('delete-form ',   request.form['delete-form'] )
+
+    try: 
+        res = request.form['add-data']
+        print('Adding data - djm')
+    except:
+        pass
+
+    return res + str(editedinfo)
+
+    
+
+    
 @app.route("/data/<dataFile>")
 def page_data_show(dataFile):
     txt = aikif_web_menu('Data')
@@ -269,8 +298,7 @@ def get_header(pge=''):
     
 def get_footer(pge=''):
     txt = pge
-    txt += '<HR><a href="http://www.acutesoftware.com.au/aikif/index.html">AIKIF web interface</a> - '
-    txt += 'written by Duncan Murray : djmurray@acutesoftware.com.au<BR>\n'
+    txt += 'AIKIF web interface - written by Duncan Murray : djmurray@acutesoftware.com.au\n'
     txt += AIKIF_WEB_VERSION + ':' + AIKIF_VERSION_NUM + '\n'
     txt += 'Python version:' + sys.version + '\n'
     return txt
