@@ -1,15 +1,5 @@
-<HTML><HEAD>
-<title>AIKIF:About</title>
-<!-- Stylesheets for responsive design -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="/static/aikif.css" media="screen" />
-<link rel="stylesheet" href="/static/aikif_mob.css" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">
-</HEAD>
-<body>
-<div id = "container">
-   <div id = "header">
-   <!-- Banner -->
-   <img src = "/static/aikif_banner.jpg" alt="AIKIF Banner"/>
+{% extends "base.html" %}
+{% block content %}
    <ul id = "menu_list">
       <LI id="top_menu"><a href=/>Home</a></li>
       <LI id="top_menu"><a href=/data>Data</a></li>
@@ -23,7 +13,4 @@
 <H4>About AIKIF and author contact</H4>
 This is an example framework to capture the flow of information initially for personal data management, but ultimately useful for AI applications.<BR>Initially it will be populated and tested for human use, but includes tests and verification process for future 'General AI's.<BR><BR>
 
-<BR><BR><BR>
-<div id="footer">
-{{ footer }} 
-</div></BODY></HTML>
+{% endblock %}
