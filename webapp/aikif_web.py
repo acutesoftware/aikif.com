@@ -46,7 +46,7 @@ menu = [
 app.config.from_object(__name__)
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'flaskr.db'),
+    DATABASE=os.path.join(app.root_path, 'aikif_db.db'),
     SECRET_KEY='development key',
     USERNAME='admin',
     PASSWORD='12345yesreally'
