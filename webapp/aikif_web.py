@@ -128,7 +128,22 @@ def _search(search_text):
 
 
 
+def get_data_list():
+    return core_data.core_data_types
+    
+def query_db(query, args=(), one=False):
+    cur = get_db().execute(query, args)
+    rv = cur.fetchall()
+    cur.close()
+    return (rv[0] if rv else None) if one else rv
 
+def insert_db(sql_str):
+    """
+    runs an insert or update query against the database
+    """
+    print("insert_db(sql_str) = ", sql_str)
+    cur = get_db().execute(sql_str, ())
+    cur.close()
 
 @app.route("/data")
 def page_data():
@@ -136,10 +151,8 @@ def page_data():
                            data=get_data_list(),
                            footer=get_footer())
 
-def get_data_list():
-    return core_data.core_data_types
+  
     
-
 @app.route("/data", methods=['POST'])
 def add_data():
     res = ''
@@ -150,27 +163,50 @@ def add_data():
     #print('update-form ',   request.form['update-form'] )
     #print('add-form ',   request.form['add-form'] )
     #print('delete-form ',   request.form['delete-form'] )
-
-    try: 
-        res = request.form['add-data']
-        print('Adding data - djm')
-    except:
-        pass
-
-    return res + str(editedinfo)
-
+    msg = ''
+    #try: 
     
+    res = request.form['add-data']
+    print('Adding data - djm')
+        
+    sql_str = "INSERT INTO CORE_FACTS (name,key,value) VALUES ("
+    sql_str += '"' + editedinfo[0] + '",'
+    sql_str += '"' + editedinfo[1] + '",'
+    sql_str += '"' + editedinfo[2] + '")'
+    
+    insert_db(sql_str)
+               
+    #except Exception as ex:
+    #    print('Error inserting ' , str(ex))
+    #    msg = "error in insert operation"
+      
+    #finally:
+            
+    
+    return render_template('data.html',
+                           data=get_data_list(),
+                           rows = [],
+                           footer=get_footer())
+ 
 
     
 @app.route("/data/<dataFile>")
 def page_data_show(dataFile):
-    txt = aikif_web_menu('Data')
-    import page_data
-    txt += page_data.get_page(dataFile)
-    txt += get_footer()
-    return txt
-    
-    
+    print('page_data_show(dataFile)' , dataFile)
+    # first step is to read the datatable (for now, just a hard coded table
+    rows = []
+    for r in query_db('select * from CORE_FACTS'):
+        print (r['name'], r['key'], r['val'])
+        rows.append(r)
+    #print(rows)
+    #rows = sql.fetchall(); 
+
+
+    return render_template('data.html',
+                           data=get_data_list(),
+                           rows = rows,
+                           footer=get_footer())
+  
 
 @app.route("/agents")
 def page_agents():
