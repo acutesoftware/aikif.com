@@ -31,4 +31,11 @@ id VARCHAR2(200),
  UPDATE_DATE DATE 
 );
 
+
+INSERT INTO CORE_FACTS (id, name,key,value) VALUES (1, "Character","Person", "Murray");
+INSERT INTO CORE_FACTS (id, name,key,value) VALUES (2, "Event","Holiday", "Christmas");
+INSERT INTO CORE_FACTS (id, name,key,value) VALUES (3, "Australia","Capital", "Canberra");
+
+
+
 CREATE INDEX ndx_CORE_FACTS ON CORE_FACTS (id,name,key,value );
