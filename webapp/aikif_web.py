@@ -96,7 +96,7 @@ def close_db(error):
 #flask initdb
 #Initialized the database.
   
-#initdb_command()  
+#initdb_command()   # RUN THIS TO RE RUN schema.sql  
   
     
 ###################### HELPER FUNCTIONS#################
@@ -137,55 +137,43 @@ def query_db(query, args=(), one=False):
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
-def insert_db(sql_str):
+def insert_db(sql_str, vals):
     """
     runs an insert or update query against the database
+    execute('insert into tablename values (?,?,?)', item)
     """
-    print("insert_db(sql_str) = ", sql_str)
-    cur = get_db().execute(sql_str, ())
-    cur.close()
+    print("insert_db(sql_str) = ", sql_str, ' vals = ', vals)
+    db = get_db()
+    db.execute(sql_str, vals)
+    db.commit()
+
 
 @app.route("/data")
 def page_data():
     return render_template('data.html',
                            data=get_data_list(),
-                           footer=get_footer())
+                           rows = query_db('select * from CORE_FACTS'),
+                           dataFile = '')
 
   
     
 @app.route("/data", methods=['POST'])
 def add_data():
-    res = ''
     editedinfo = []
-    for i in range(0,3):
-        editedinfo.append(request.form['col_' + str(i)])
+    #editedinfo.append('first_record')
+    editedinfo.append(request.form['col_1'])
+    editedinfo.append(request.form['col_2'])
+    editedinfo.append(request.form['col_3'])
+    res = request.form['add-data']   # this gets the button value if Add button clicked
+    print('Adding data : ', editedinfo )
         
-    #print('update-form ',   request.form['update-form'] )
-    #print('add-form ',   request.form['add-form'] )
-    #print('delete-form ',   request.form['delete-form'] )
-    msg = ''
-    #try: 
-    
-    res = request.form['add-data']
-    print('Adding data - djm')
-        
-    sql_str = "INSERT INTO CORE_FACTS (name,key,value) VALUES ("
-    sql_str += '"' + editedinfo[0] + '",'
-    sql_str += '"' + editedinfo[1] + '",'
-    sql_str += '"' + editedinfo[2] + '")'
-    
-    insert_db(sql_str)
-               
-    #except Exception as ex:
-    #    print('Error inserting ' , str(ex))
-    #    msg = "error in insert operation"
-      
-    #finally:
-            
-    
+    sql_str = "INSERT INTO CORE_FACTS ('NAME','KEY','VALUE') VALUES (?,?,?)"
+    insert_db(sql_str, editedinfo)
+
     return render_template('data.html',
                            data=get_data_list(),
-                           rows = [],
+                           rows = query_db('select * from CORE_FACTS'),
+                           dataFile = '',
                            footer=get_footer())
  
 
@@ -194,17 +182,13 @@ def add_data():
 def page_data_show(dataFile):
     print('page_data_show(dataFile)' , dataFile)
     # first step is to read the datatable (for now, just a hard coded table
-    rows = []
-    for r in query_db('select * from CORE_FACTS'):
-        print (r['name'], r['key'], r['val'])
-        rows.append(r)
-    #print(rows)
-    #rows = sql.fetchall(); 
-
-
+    #res = query_db('select * from CORE_FACTS')
+    #print('res = ' , res)
+    
     return render_template('data.html',
                            data=get_data_list(),
-                           rows = rows,
+                           rows = query_db('select * from CORE_FACTS'),
+                           dataFile=dataFile,
                            footer=get_footer())
   
 
