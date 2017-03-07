@@ -19,6 +19,16 @@
     {% endfor %}
 </div>
 
+
+<div id="core_facts">
+<H4> Content of CORE_FACTS</H4>
+{% for c in rows %}
+    {{ c[0] }}, {{ c[1] }}, {{ c[2] }} , <BR>
+    {% endfor %}
+</div>
+
+
+
 <div id="add_data">
 <H4>Add Data Item</H4>
 
@@ -38,8 +48,12 @@
     <TD><div id="form_input"><input type="text" name="col_1"></div></TD>
   </TR>
   <TR>
-    <TD><div id="form_label">Params</div></TD>
+    <TD><div id="form_label">Key</div></TD>
     <TD><div id="form_input"><input type="text" name="col_2"></div></TD>
+  </TR>
+  <TR>
+    <TD><div id="form_label">Value</div></TD>
+    <TD><div id="form_input"><input type="text" name="col_3"></div></TD>
   </TR>
   <TR><TD></TD>
   <TD>
