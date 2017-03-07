@@ -41,12 +41,12 @@ menu = [
 
 ###### DATABASE #####
 
-
+database_filename = 'aikif_db.db'
 
 app.config.from_object(__name__)
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'aikif_db.db'),
+    DATABASE=os.path.join(app.root_path, database_filename),
     SECRET_KEY='development key',
     USERNAME='admin',
     PASSWORD='12345yesreally'
@@ -79,14 +79,14 @@ def get_db():
     """Opens a new database connection if there is none yet for the
     current application context.
     """
-    if not hasattr(g, 'sqlite_db'):
+    if not hasattr(g, database_filename): # was 'sqlite_db'
         g.sqlite_db = connect_db()
     return g.sqlite_db
 
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
-    if hasattr(g, 'sqlite_db'):
+    if hasattr(g, database_filename): # was 'sqlite_db'
         g.sqlite_db.close()
 
   
@@ -296,11 +296,9 @@ def get_header(pge=''):
     txt += '<body>\n'
     return txt
     
-def get_footer(pge=''):
-    txt = pge
-    txt += 'AIKIF web interface - written by Duncan Murray : djmurray@acutesoftware.com.au\n'
-    txt += AIKIF_WEB_VERSION + ':' + AIKIF_VERSION_NUM + '\n'
-    txt += 'Python version:' + sys.version + '\n'
+def get_footer():
+    txt = AIKIF_WEB_VERSION + ':' + AIKIF_VERSION_NUM + '\n'
+    txt += ', Python version:' + sys.version + '\n'
     return txt
 
 def escape_html(s):
