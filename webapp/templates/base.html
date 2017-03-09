@@ -14,7 +14,19 @@
    <div id = "header">
    <!-- Banner -->
    <img src = "/static/aikif_banner.jpg" alt="AIKIF Banner"/>
-  
+ 
+    <div>AIKIF | 
+        {% if is_authenticated %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+            <a href="{{ url_for('page_home') }}">Logged in as BLAH</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        
+        {% endif %}
+    </div>
+
+
+ 
     {% block content %}{% endblock %}
 
 
