@@ -15,11 +15,13 @@ Welcome to AIKIF<BR><BR>
       <br>
       <form action="" method="post">
         <input type="text" placeholder="Username" name="username" value="{{
-          request.form.username }}">
+          request.form.username }}"><BR>
          <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
+          request.form.password }}"><BR>
+        <input class="btn btn-default" type="submit" value="Login"><BR>
       </form>
+      <BR>
+      Click here to register<BR>
       {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
       {% endif %}
