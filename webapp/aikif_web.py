@@ -13,8 +13,6 @@ AIKIF_VERSION_NUM = "Version 0.2.1 (alpha) - updated 15-Jan-2017"
 
 
 
-import datetime
-
  
 
 from flask import Flask
@@ -30,15 +28,13 @@ from flask import flash
 from flask_login import LoginManager   
 from flask_login import UserMixin   
 from flask_login import login_required
+from flask_login import login_user
 
 
 
  
 from aikif import core_data   
-   
-   
-print('core_data.core_data_types = ', core_data.core_data_types)   
-   
+
 import sqlite3
   
 
@@ -46,12 +42,11 @@ import sqlite3
 # --- local flask app files ---- 
 
 import web_utils as web
-import users
+from users import User
 
 
 
 app = Flask(__name__)
-
 
 
 menu = [
@@ -63,6 +58,18 @@ menu = [
     ['/about',   'About',    'About AIKIF and author contact']
     ]
 
+    
+###### User Authentication ####
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
+    
+    
 ###### DATABASE #####
 
 database_filename = 'aikif_db.db'
@@ -143,14 +150,22 @@ is_authenticated = False
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME']:
+        username = request.form['username']
+        password = request.form['password']
+        if username != app.config['USERNAME']:
             error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
+        elif password != app.config['PASSWORD']:
             error = 'Invalid password'
         else:
             session['logged_in'] = True
+            user = User(username, password, 'blank@email.com')
+            login_user(user)
+
             flash('You were logged in')
-            return redirect(url_for('show_entries'))
+            
+            
+            
+            return redirect(url_for('page_home'))
     return render_template('login.html', error=error)
 
 @app.route('/logout')
@@ -210,6 +225,7 @@ def insert_db(sql_str, vals):
 
 
 @app.route("/data")
+@login_required
 def page_data():
     return render_template('data.html',
                            data=get_data_list(),
