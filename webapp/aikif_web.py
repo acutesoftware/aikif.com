@@ -6,11 +6,17 @@ import os
 print ("sys.version = ", sys.version)
 print ("os.getcwd() = ", os.getcwd())
 
+
 #AIKIF_WEB_VERSION = "PROD"
 AIKIF_WEB_VERSION = "DEV"
 AIKIF_VERSION_NUM = "Version 0.2.1 (alpha) - updated 15-Jan-2017"
 
-import web_utils as web
+
+
+import datetime
+
+ 
+
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -21,14 +27,32 @@ from flask import url_for
 from flask import abort
 from flask import flash   
    
+from flask_login import LoginManager   
+from flask_login import UserMixin   
+from flask_login import login_required
+
+
+
+ 
 from aikif import core_data   
    
    
 print('core_data.core_data_types = ', core_data.core_data_types)   
    
 import sqlite3
-   
+  
+
+
+# --- local flask app files ---- 
+
+import web_utils as web
+import users
+
+
+
 app = Flask(__name__)
+
+
 
 menu = [
     ['/',        'Home',     'This is the admin web interface for AIKIF (Artificial Intelligence Knowledge Information Framework)'],
@@ -91,6 +115,9 @@ def close_db(error):
 
   
 
+  
+  
+
 
 # Now, it is possible to create a database with the flask script:
 #flask initdb
@@ -133,6 +160,9 @@ def logout():
     return redirect(url_for('page_home'))
 
 
+    
+    
+    
 @app.route("/")
 def page_home():
     #user = g.user
