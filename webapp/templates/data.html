@@ -13,6 +13,14 @@
 <div id="content">
 <H4>Core Data</H4>
 
+
+{% if user.is_authenticated()%}
+  Hi {{ current_user.name }}!
+{% else %}
+  Welcome Guest
+{% endif %}
+
+
 <div id="data_list">
 {% for d in data %}
     <option>{{ d }}</option>
