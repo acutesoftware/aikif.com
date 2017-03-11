@@ -33,6 +33,7 @@
         {% if is_authenticated %}
             <a href="{{ url_for('login') }}">Login</a>
         {% else %}
+            <a href="{{ url_for('login') }}">Login (to be removed)</a>
             <a href="{{ url_for('page_home') }}">Logged in as BLAH</a>
             <a href="{{ url_for('logout') }}">Logout</a>
         
