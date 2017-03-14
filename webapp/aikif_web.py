@@ -225,7 +225,7 @@ def insert_db(sql_str, vals):
 
 
 @app.route("/data")
-@login_required
+#@login_required
 def page_data():
     return render_template('data.html',
                            data=get_data_list(),
