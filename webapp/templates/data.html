@@ -14,11 +14,6 @@
 <H4>Core Data</H4>
 
 
-{% if user.is_authenticated()%}
-  Hi {{ current_user.name }}!
-{% else %}
-  Welcome Guest
-{% endif %}
 
 
 <div id="data_list">
@@ -30,9 +25,14 @@
 
 <div id="core_facts">
 <H4> Content of CORE_FACTS</H4>
-{% for c in rows %}
-    {{ c[0] }}, {{ c[1] }}, {{ c[2] }} , <BR>
+<TABLE width=50% valign=top align=centre>
+{% for row in rows %}
+    <TR>
+    {% for col in row %}
+        <TD>{{ col }}</TD>
     {% endfor %}
+    </TR>
+{% endfor %}
 </div>
 
 
