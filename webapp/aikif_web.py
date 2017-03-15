@@ -181,27 +181,14 @@ def logout():
 @app.route("/")
 def page_home():
     #user = g.user
-    return render_template('index.html',
-                           footer=get_footer())
+    return render_template('index.html')
 
-
-                           
-                           
-                           
-                           
-                           
 
 @app.route('/', methods=['POST'])
 def search_post():
-    return(_search(request.form['search_text']))
- 
-def _search(search_text):
-    txt = aikif_web_menu()
-    txt += web.build_search_form()
-    import page_search
-    txt += page_search.get_page(search_text)
-    return txt
 
+    return 'todo'
+ 
 
 
 def get_data_list():
@@ -272,8 +259,8 @@ def page_data_show(dataFile):
 @app.route("/agents")
 def page_agents():
     return render_template('agents.html',
-                           agents=get_agents(),
-                           footer=get_footer())
+                           agents=get_agents()
+                           )
 
 
 
@@ -327,22 +314,16 @@ def edit_agents():
     
 @app.route("/programs")
 def page_programs():
-    return render_template('programs.html',
-                           footer=get_footer())
+    return render_template('programs.html')
 
     
 @app.route("/programs/rebuild")
 def page_programs_rebuild():
-    txt = aikif_web_menu('Programs')
-    import page_programs as prg
-    prg.rebuild()
-    txt += prg.get_page()
-    return txt
+    return 'todo'
 
 @app.route("/about")
 def page_about():
-    return render_template('about.html',
-                           footer=get_footer())
+    return render_template('about.html')
 
 
     
@@ -351,85 +332,6 @@ def page_error(calling_page):
     txt += '<H2>Error - problem calling ' + calling_page + '</H2>'
     txt += get_footer()
     return txt
-    
-def aikif_web_menu(cur=''):
-    """ returns the web page header containing standard AIKIF top level web menu """
-    pgeHdg = ''
-    pgeBlurb = ''
-    if cur == '': 
-        cur = 'Home'
-    txt = get_header(cur) #"<div id=top_menu>"
-    txt += '<div id = "container">\n'
-    txt += '   <div id = "header">\n'
-    txt += '   <!-- Banner -->\n'
-    txt += '   <img src = "' + os.path.join('/static','aikif_banner.jpg') + '" alt="AIKIF Banner"/>\n'
-    txt += '   <ul id = "menu_list">\n'
-    for m in menu:
-        if m[1] == cur:
-            txt += '      <LI id="top_menu_selected"><a href=' + m[0] + '>' + m[1] + '</a></li>\n'
-            pgeHdg = m[1]
-            try:
-                pgeBlurb = m[2]
-            except Exception:
-                pass
-        else:
-            txt += '      <LI id="top_menu"><a href=' + m[0] + '>' + m[1] + '</a></li>\n'
-    txt += "    </ul>\n    </div>\n\n"
-    txt += '<H1>AIKIF ' + pgeHdg + '</H1>\n'
-    txt += '<H4>' + pgeBlurb + '</H4>\n'
-    return txt
-
-###################### TEMPLATES #########################
-
-def get_header(pge=''):
-    txt = '<HTML><HEAD>\n'
-    txt += '<title>AIKIF:' + pge + '</title>\n'
-    txt += '<!-- Stylesheets for responsive design -->\n'
-    txt += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n'
-    txt += '<link rel="stylesheet" type="text/css" href="' + os.path.join('/static','aikif.css') + '" media="screen" />\n'
-    txt += '<link rel="stylesheet" href="' + os.path.join('/static','aikif_mob.css')
-    txt += '" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">\n'
-    txt += '</HEAD>\n'
-    txt += '<body>\n'
-    return txt
-    
-def get_footer():
-    txt = AIKIF_WEB_VERSION + ':' + AIKIF_VERSION_NUM + '\n'
-    txt += ', Python version:' + sys.version + '\n'
-    return txt
-
-def escape_html(s):
-    res = s
-    res = res.replace('&', "&amp;")
-    res = res.replace('>', "&gt;")
-    res = res.replace('<', "&lt;")
-    res = res.replace('"', "&quot;")
-    return res
-
-def format_list_as_html_table_row(lst):
-    txt = '<TR>'
-    for i in lst:
-        txt = txt + '<TD>' + i + '</TD>'
-    txt = txt + '</TR>'	
-    return txt
-    
-def format_csv_to_html(csvFile, opHTML):
-    """
-    print(len(opHTML))
-    with open(csvFile) as csv_file:
-        for row in csv.reader(csv_file, delimiter=','):
-            txt += "<TR>"
-            for col in row:
-                txt += "<TD>"
-                txt += escape_html(col)
-                txt += "</TD>"
-            txt += "</TR>"
-        txt += "</TABLE>"
-    """
-    txt = 'TODO format_csv_to_html to convert' + csvFile + ' to ' + opHTML
-    return txt
-    
-
-    
+     
 if __name__ == "__main__":
     start_server()
