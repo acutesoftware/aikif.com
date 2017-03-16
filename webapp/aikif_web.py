@@ -237,8 +237,8 @@ def add_data():
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
-                           dataFile = '',
-                           footer=get_footer())
+                           dataFile = ''
+                           )
  
 
     
@@ -252,8 +252,8 @@ def page_data_show(dataFile):
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
-                           dataFile=dataFile,
-                           footer=get_footer())
+                           dataFile=dataFile
+                           )
   
 
 @app.route("/agents")
@@ -326,12 +326,6 @@ def page_about():
     return render_template('about.html')
 
 
-    
-def page_error(calling_page):
-    txt = '<BR><BR>'
-    txt += '<H2>Error - problem calling ' + calling_page + '</H2>'
-    txt += get_footer()
-    return txt
      
 if __name__ == "__main__":
     start_server()
