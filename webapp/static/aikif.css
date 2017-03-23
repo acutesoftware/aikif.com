@@ -172,7 +172,11 @@ pre {
     border-right: none;
 }
 
-
+#login {
+	width: 500px;	
+	float: right;
+	margin: 20px 0px 0px 0px; 
+}
 
 /*--------------------------------
 			Colour
@@ -234,3 +238,6 @@ TD {
   border-right: 1px solid #C1C3D1;
 }
 
+#login {
+	font-size: 80%;
+}
