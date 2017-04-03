@@ -68,7 +68,12 @@ login_manager.init_app(app)
 def load_user(user_id):
     return User.get(user_id)
 
-    
+def get_user():
+    try:
+        user = session['username']
+    except:
+        user = ''
+    return user    
     
 ###### DATABASE #####
 
