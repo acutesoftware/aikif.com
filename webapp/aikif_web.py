@@ -47,6 +47,7 @@ from users import User
 
 
 app = Flask(__name__)
+is_authenticated = False
 
 
 menu = [
@@ -149,20 +150,24 @@ def start_server():
 
 ###################### ROUTING #########################
 
-is_authenticated = False
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        try:
+            username = request.form['username']
+            password = request.form['password']
+        except:
+            pass   # ignore blank user/pass - they will be rejected further on
         if username != app.config['USERNAME']:
             error = 'Invalid username'
         elif password != app.config['PASSWORD']:
             error = 'Invalid password'
+            is_authenticated = False
         else:
             session['logged_in'] = True
+            is_authenticated = True
             user = User(username, password, 'blank@email.com')
             login_user(user)
 
@@ -222,6 +227,7 @@ def page_data():
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
+                           is_authenticated=is_authenticated,
                            dataFile = '')
 
   
@@ -257,6 +263,7 @@ def page_data_show(dataFile):
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
+                           is_authenticated=is_authenticated,
                            dataFile=dataFile
                            )
   
@@ -264,7 +271,8 @@ def page_data_show(dataFile):
 @app.route("/agents")
 def page_agents():
     return render_template('agents.html',
-                           agents=get_agents()
+                           agents=get_agents(),
+                           is_authenticated=is_authenticated
                            )
 
 
