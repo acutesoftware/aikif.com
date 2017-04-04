@@ -30,7 +30,7 @@
    <img src = "/static/aikif_banner.jpg" alt="AIKIF Banner"/>
  
 <div id="login">AIKIF | 
-        {% if is_authenticated %}
+        {% if logged_on %}
             Logged in as {{ username }}
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
