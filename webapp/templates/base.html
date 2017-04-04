@@ -30,8 +30,8 @@
    <img src = "/static/aikif_banner.jpg" alt="AIKIF Banner"/>
  
 <div id="login">AIKIF | 
-        {% if is_authenticated == 'Y' %}
-            Your Logged in as {{ username }}
+        {% if is_authenticated %}
+            Logged in as {{ username }}
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
             <a href="{{ url_for('login') }}">Login</a>
