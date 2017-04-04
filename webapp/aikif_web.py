@@ -47,7 +47,6 @@ from users import User
 
 
 app = Flask(__name__)
-is_authenticated = False
 
 
 menu = [
@@ -164,13 +163,11 @@ def login():
             error = 'Invalid username'
         elif password != app.config['PASSWORD']:
             error = 'Invalid password'
-            is_authenticated = False
         else:
             session['logged_in'] = True
-            is_authenticated = True
-            user = User(username, password, 'blank@email.com')
-            login_user(user)
-
+            session['username'] = username
+            #user = User(username, password, 'blank@email.com')
+            #login_user(user)
             flash('You were logged in')
             
             
@@ -181,17 +178,26 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    session.pop('username', None)
     flash('You were logged out')
     return redirect(url_for('page_home'))
 
 
-    
+def am_i_authenticated():
+    try:
+        if session['logged_in'] == True:
+            return True
+    except:
+        pass
+    return False
     
     
 @app.route("/")
 def page_home():
     #user = g.user
-    return render_template('index.html')
+    return render_template('index.html', 
+        username = get_user(),
+        logged_on=am_i_authenticated())
 
 
 @app.route('/', methods=['POST'])
@@ -227,7 +233,8 @@ def page_data():
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
-                           is_authenticated=is_authenticated,
+                           logged_on=am_i_authenticated(),
+                           username = get_user(),
                            dataFile = '')
 
   
@@ -248,7 +255,9 @@ def add_data():
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
-                           dataFile = ''
+                           dataFile = '',
+                           username = get_user(),
+                           logged_on=am_i_authenticated()
                            )
  
 
@@ -263,7 +272,8 @@ def page_data_show(dataFile):
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
-                           is_authenticated=is_authenticated,
+                           logged_on=am_i_authenticated(),
+                           username = get_user(),
                            dataFile=dataFile
                            )
   
@@ -272,7 +282,8 @@ def page_data_show(dataFile):
 def page_agents():
     return render_template('agents.html',
                            agents=get_agents(),
-                           is_authenticated=is_authenticated
+                           username = get_user(),
+                           logged_on=am_i_authenticated()
                            )
 
 
@@ -327,7 +338,9 @@ def edit_agents():
     
 @app.route("/programs")
 def page_programs():
-    return render_template('programs.html')
+    return render_template('programs.html',
+                username = get_user(),
+                logged_on=am_i_authenticated())
 
     
 @app.route("/programs/rebuild")
@@ -336,7 +349,9 @@ def page_programs_rebuild():
 
 @app.route("/about")
 def page_about():
-    return render_template('about.html')
+    return render_template('about.html',
+                    username = get_user(),
+                    logged_on=am_i_authenticated())
 
 
      
