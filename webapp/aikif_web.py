@@ -30,14 +30,12 @@ from flask_login import UserMixin
 from flask_login import login_required
 from flask_login import login_user
 
-
-
- 
-from aikif import core_data   
-
 import sqlite3
   
+import logging
+from logging.handlers import RotatingFileHandler
 
+from aikif import core_data   
 
 # --- local flask app files ---- 
 
@@ -140,6 +138,17 @@ def close_db(error):
     
 ###################### HELPER FUNCTIONS#################
 def start_server():
+
+    formatter = logging.Formatter(
+            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+        
+    handler = RotatingFileHandler('aikif_web.log', maxBytes=20000, backupCount=2)
+    handler.setLevel(logging.INFO)
+    handler.setFormatter(formatter)
+    app.logger.addHandler(handler)
+
+
+
     if AIKIF_WEB_VERSION == "DEV":
         print("WARNING - DEBUG MODE ACTIVE")
         app.debug = True # TURN THIS OFF IN PRODUCTION
@@ -163,12 +172,15 @@ def login():
             error = 'Invalid username'
         elif password != app.config['PASSWORD']:
             error = 'Invalid password'
+            
+            app.logger.warning('invalid login' + username)
         else:
             session['logged_in'] = True
             session['username'] = username
             #user = User(username, password, 'blank@email.com')
             #login_user(user)
             flash('You were logged in')
+            app.logger.info('successful login' + username)
             
             
             
