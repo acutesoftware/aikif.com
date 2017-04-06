@@ -56,7 +56,9 @@ menu = [
     ['/about',   'About',    'About AIKIF and author contact']
     ]
 
-    
+ 
+upload_folder = os.getcwd()
+ 
 ###### User Authentication ####
 
 login_manager = LoginManager()
@@ -282,8 +284,8 @@ def load_new_file(name):
     # Save the file to the server    
     file_to_upload = request.files['file']
     filename = web.secure_filename(file_to_upload.filename)
-    dest_file = os.path.join(mod_cfg.upload_folder, filename)
-
+    dest_file = os.path.join(upload_folder, filename)
+    print('dest_file = ', dest_file)
     try:
         file_to_upload.save(dest_file)
     except Exception as ex:
@@ -309,7 +311,6 @@ def load_new_file(name):
         return render_template('data.html')
                        
     #staging table now loaded, so call PLSQL to run the job to process list    
-    #web.exec_plsql('unicat.log_ETL', ['SUCCESS', 'loaded file to staging master - ' + filename], conn_str)
     
     return render_template('data.html',
                    data=get_data_list(),
