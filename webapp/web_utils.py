@@ -143,6 +143,19 @@ def read_csv_to_html_list(csvFile):
             txt += "</div>\n"
     return txt
    
+def read_csv_to_list(filename):
+    """
+    reads a CSV file to a list
+    """
+    import csv
 
+    rows_to_load = []
+    with open(filename, 'r', encoding='cp1252') as csvfile: # sort of works with , encoding='cp65001'
+        csvreader = csv.reader(csvfile, delimiter = ',' )
+
+        reader = csv.reader(csvfile)            
+
+        rows_to_load = list(reader)
+    return rows_to_load
 
    
