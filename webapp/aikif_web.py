@@ -273,7 +273,52 @@ def add_data():
                            )
  
 
+
+@app.route('/data/<name>', methods=['POST'])                           
+def load_new_file(name):
+    """
+ 
+    """
+    # Save the file to the server    
+    file_to_upload = request.files['file']
+    filename = web.secure_filename(file_to_upload.filename)
+    dest_file = os.path.join(mod_cfg.upload_folder, filename)
+
+    try:
+        file_to_upload.save(dest_file)
+    except Exception as ex:
+        flash('Error saving file to server - did you pick a file?' + str(ex))
+        app.logger.warning( 'Error saving file to server - did you pick a file?' + str(ex))
     
+        return render_template('data.html',
+                           data=get_data_list(),
+                           rows = query_db('select * from CORE_FACTS'),
+                           logged_on=am_i_authenticated(),
+                           username = get_user(),
+                           dataFile = '')
+    try:
+    
+        # load the file to a list here
+        rows_to_load = web.read_csv_to_list(dest_file)
+    
+        #real_col_list, msg = web.load_csv_to_stage(listname, rows_to_load, conn_str)
+        flash('Loaded ' + name)
+        
+    except Exception as ex:
+        flash('Error loading file - is it a valid CSV file?' + str(ex))
+        return render_template('data.html')
+                       
+    #staging table now loaded, so call PLSQL to run the job to process list    
+    #web.exec_plsql('unicat.log_ETL', ['SUCCESS', 'loaded file to staging master - ' + filename], conn_str)
+    
+    return render_template('data.html',
+                   data=get_data_list(),
+                   rows = query_db('select * from CORE_FACTS'),
+                   logged_on=am_i_authenticated(),
+                   username = get_user(),
+                   dataFile = '')
+
+ 
 @app.route("/data/<dataFile>")
 def page_data_show(dataFile):
     print('page_data_show(dataFile)' , dataFile)
