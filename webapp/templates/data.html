@@ -23,8 +23,18 @@
 </div>
 
 
+    <H4>Add Data via File</H4>
+    <form action="{{ url_for('load_new_file', name=NEW )}}" method=post enctype=multipart/form-data><BR>
+    Choose a CSV file to upload : <input type=file  size=120 name=file><BR><BR>
+    Enter a Name for this file: </TD><TD><input type="text" name="new_list">
+    <input type=submit value="Add File" name=btn_upload><BR>
+    <input type="hidden" name="NEW_LIST_FLAG" value='Y'>
+    </form>
+
+
+
 <div id="core_facts">
-<H4> Content of CORE_FACTS</H4>
+<H4> Content of CORE_DATA</H4>
 <TABLE width=50% valign=top align=centre>
 {% for row in rows %}
     <TR>
@@ -34,6 +44,9 @@
     </TR>
 {% endfor %}
 </div>
+
+
+
 
 
 
