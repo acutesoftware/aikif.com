@@ -9,7 +9,7 @@ print ("os.getcwd() = ", os.getcwd())
 
 #AIKIF_WEB_VERSION = "PROD"
 AIKIF_WEB_VERSION = "DEV"
-AIKIF_VERSION_NUM = "Version 0.2.1 (alpha) - updated 15-Jan-2017"
+AIKIF_VERSION_NUM = "Version 0.2.2 (alpha) - updated 6-Apr-2017"
 
 
 
@@ -241,7 +241,7 @@ def insert_db(sql_str, vals):
     db.commit()
 
 
-@app.route("/data")
+@app.route("/data", methods=['GET'])
 #@login_required
 def page_data():
     return render_template('data.html',
@@ -256,62 +256,72 @@ def page_data():
 @app.route("/data", methods=['POST'])
 def add_data():
     editedinfo = []
-    #editedinfo.append('first_record')
-    editedinfo.append(request.form['col_1'])
-    editedinfo.append(request.form['col_2'])
-    editedinfo.append(request.form['col_3'])
-    res = request.form['add-data']   # this gets the button value if Add button clicked
-    print('Adding data : ', editedinfo )
-        
-    sql_str = "INSERT INTO CORE_FACTS ('NAME','KEY','VALUE') VALUES (?,?,?)"
-    insert_db(sql_str, editedinfo)
-
-    return render_template('data.html',
-                           data=get_data_list(),
-                           rows = query_db('select * from CORE_FACTS'),
-                           dataFile = '',
-                           username = get_user(),
-                           logged_on=am_i_authenticated()
-                           )
- 
-
-
-@app.route('/data/<name>', methods=['POST'])                           
-def load_new_file(name):
-    """
- 
-    """
-    # Save the file to the server    
-    file_to_upload = request.files['file']
-    filename = web.secure_filename(file_to_upload.filename)
-    dest_file = os.path.join(upload_folder, filename)
-    print('dest_file = ', dest_file)
+    res = None
     try:
-        file_to_upload.save(dest_file)
-    except Exception as ex:
-        flash('Error saving file to server - did you pick a file?' + str(ex))
-        app.logger.warning( 'Error saving file to server - did you pick a file?' + str(ex))
+        res = request.form['add-data']
+    except:
+        pass
     
+    if res:
+        
+        #editedinfo.append('first_record')
+        editedinfo.append(request.form['col_1'])
+        editedinfo.append(request.form['col_2'])
+        editedinfo.append(request.form['col_3'])
+        res = request.form['add-data']   # this gets the button value if Add button clicked
+        print('Adding data : ', editedinfo )
+            
+        sql_str = "INSERT INTO CORE_FACTS ('NAME','KEY','VALUE') VALUES (?,?,?)"
+        insert_db(sql_str, editedinfo)
+
         return render_template('data.html',
-                           data=get_data_list(),
-                           rows = query_db('select * from CORE_FACTS'),
-                           logged_on=am_i_authenticated(),
-                           username = get_user(),
-                           dataFile = '')
+                               data=get_data_list(),
+                               rows = query_db('select * from CORE_FACTS'),
+                               dataFile = '',
+                               username = get_user(),
+                               logged_on=am_i_authenticated()
+                               )
+                               
+                               
+    res = None
     try:
-    
-        # load the file to a list here
-        rows_to_load = web.read_csv_to_list(dest_file)
-    
-        #real_col_list, msg = web.load_csv_to_stage(listname, rows_to_load, conn_str)
-        flash('Loaded ' + name)
+        res = request.form['btn_load']
+    except:
+        pass
+    if res: # Save the file to the server
+        print('hello')
+        return
         
-    except Exception as ex:
-        flash('Error loading file - is it a valid CSV file?' + str(ex))
-        return render_template('data.html')
-                       
-    #staging table now loaded, so call PLSQL to run the job to process list    
-    
+        file_to_upload = request.files['file']
+        filename = web.secure_filename(file_to_upload.filename)
+        dest_file = os.path.join(upload_folder, filename)
+        print('dest_file = ', dest_file)
+        try:
+            file_to_upload.save(dest_file)
+        except Exception as ex:
+            flash('Error saving file to server - did you pick a file?' + str(ex))
+            app.logger.warning( 'Error saving file to server - did you pick a file?' + str(ex))
+        
+            return render_template('data.html',
+                               data=get_data_list(),
+                               rows = query_db('select * from CORE_FACTS'),
+                               logged_on=am_i_authenticated(),
+                               username = get_user(),
+                               dataFile = '')
+        try:
+        
+            # load the file to a list here
+            rows_to_load = web.read_csv_to_list(dest_file)
+        
+            #real_col_list, msg = web.load_csv_to_stage(listname, rows_to_load, conn_str)
+            flash('Loaded ' + name)
+            
+        except Exception as ex:
+            flash('Error loading file - is it a valid CSV file?' + str(ex))
+            return render_template('data.html')
+                           
+        #staging table now loaded, so call PLSQL to run the job to process list    
+        
     return render_template('data.html',
                    data=get_data_list(),
                    rows = query_db('select * from CORE_FACTS'),
@@ -320,7 +330,7 @@ def load_new_file(name):
                    dataFile = '')
 
  
-@app.route("/data/<dataFile>")
+@app.route("/data/<dataFile>", methods=['GET'])
 def page_data_show(dataFile):
     print('page_data_show(dataFile)' , dataFile)
     # first step is to read the datatable (for now, just a hard coded table
