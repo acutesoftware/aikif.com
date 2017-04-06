@@ -18,25 +18,39 @@ INSERT INTO USERS (username,password_hash) VALUES ('test','hkdfhrhthgd');
 -- CREATE Fact Table - CORE_EVENTS
 ---------------------------------------------
 DROP TABLE IF EXISTS CORE_DATA;
-CREATE TABLE CORE_EVENTS (
- id integer primary key autoincrement, 
+CREATE TABLE CORE_DATA (
+ id integer primary key, 
  user_id integer not null,
- core_data_type CHAR(10),
- name CHAR(200), 
- key CHAR(200), 
- value TEST, 
+ dtype CHAR(10),
+ dname CHAR(200), 
+ dkey CHAR(200), 
+ dvalue TEXT, 
  UPDATE_DATE DATE 
 );
 
-CREATE INDEX ndx_CORE_EVENTS ON CORE_EVENTS (id,name,key,value );
-
-INSERT INTO USERS (username,password_hash) VALUES ("PUBLIC","PUBLIC");
-INSERT INTO USERS (username,password_hash) VALUES ("test","hkdfhrhthgd");
-
-INSERT INTO CORE_FACTS (id, name,key,value) VALUES (1, "Character","Person", "Murray");
-INSERT INTO CORE_FACTS (id, name,key,value) VALUES (2, "Event","Holiday", "Christmas");
-INSERT INTO CORE_FACTS (id, name,key,value) VALUES (3, "Australia","Capital", "Canberra");
+DROP SEQUENCE IF EXISTS CORE_DATA_seq;
+CREATE SEQUENCE CORE_DATA_seq;
+ALTER TABLE CORE_DATA ALTER id SET DEFAULT NEXTVAL('CORE_DATA_seq');
 
 
+CREATE INDEX ndx_CORE_DATA ON CORE_DATA (id,dname,dkey,dvalue );
 
-CREATE INDEX ndx_CORE_FACTS ON CORE_FACTS (id,name,key,value );
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Character','Email', 'Duncan Murray', 'djmurray@gmail.com');
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Character','Phone', 'Duncan Murray', '555-5555');
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Character','Address', 'Duncan Murray', 'South Australia');
+	
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Event','Public Holidays', 'Christmas', '25/12');
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Event','Reminder', 'Buy Milk', 'tomorrow after work');
+	
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Location', 'Capital Cities', 'Australia', 'Canberra');
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Location', 'Capital Cities', 'Spain', 'Madrid');
+INSERT INTO CORE_DATA (user_id, dtype, dname,dkey,dvalue) VALUES 
+	(1, 'Location', 'GPS Coords', 'Adelaide, Australia', '-34.928599, 138.600102');
+	
