@@ -290,10 +290,9 @@ def add_data():
         pass
     if res: # Save the file to the server
         print('hello')
-        return
         
         file_to_upload = request.files['file']
-        filename = web.secure_filename(file_to_upload.filename)
+        filename = file_to_upload.filename
         dest_file = os.path.join(upload_folder, filename)
         print('dest_file = ', dest_file)
         try:
