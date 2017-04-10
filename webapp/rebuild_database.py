@@ -42,6 +42,8 @@ from aikif import core_data
 import web_utils as web
 from users import User
 
+DATABASE_DDL = 'schema_PostgreSQL.sql'
+DATABASE_DDL = 'schema_sqlite.sql'
 
 
 app = Flask(__name__)
@@ -101,7 +103,7 @@ def connect_db():
 
 def init_db():
     db = get_db()
-    with app.open_resource('schema.sql', mode='r') as f:
+    with app.open_resource(DATABASE_DDL, mode='r') as f:
         db.cursor().executescript(f.read())
     db.commit()
 
