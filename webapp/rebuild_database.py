@@ -21,14 +21,6 @@ from flask import render_template
 from flask import session
 from flask import g
 from flask import redirect
-from flask import url_for
-from flask import abort
-from flask import flash   
-   
-from flask_login import LoginManager   
-from flask_login import UserMixin   
-from flask_login import login_required
-from flask_login import login_user
 
 import sqlite3
   
@@ -58,25 +50,7 @@ menu = [
     ['/about',   'About',    'About AIKIF and author contact']
     ]
 
- 
-upload_folder = os.getcwd()
- 
-###### User Authentication ####
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
-
-def get_user():
-    try:
-        user = session['username']
-    except:
-        user = ''
-    return user    
-    
 ###### DATABASE #####
 
 database_filename = 'aikif_db.db'
@@ -90,7 +64,6 @@ app.config.update(dict(
     PASSWORD='12345yesreally'
 ))
 
-#os.environ['FLASK_APP'] = 'aikif.py'
 os.environ['FLASK_APP'] = "aikif_web.py"
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
@@ -128,8 +101,6 @@ def close_db(error):
         g.sqlite_db.close()
 
   
-
-
 initdb_command()   # RUN THIS TO RE RUN schema.sql  
   
       
