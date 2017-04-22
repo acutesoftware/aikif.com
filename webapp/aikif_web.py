@@ -414,10 +414,21 @@ def page_programs():
 def page_programs_rebuild():
     return 'todo'
 
+    
+def get_events():    
+    return [
+        {'date':'20170422', 'time':'0900', 'details':'Initial Version'},
+        {'date':'20170422', 'time':'1100', 'details':'Update with database'},
+        
+    ]
+    
+    
 @app.route("/about")
 def page_about():
+    
     return render_template('about.html',
                     username = get_user(),
+                    events = get_events(),
                     logged_on=am_i_authenticated())
 
 
