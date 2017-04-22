@@ -10,8 +10,8 @@ Setup
 git remote add origin https://github.com/acutesoftware/aikif.com.git
 
 
-To initialise the database, uncomment the line
-     initdb_command()   
+To initialise the database, run the program
+     rebuild_database.py   
      
 which builds the schema.sql     
      
