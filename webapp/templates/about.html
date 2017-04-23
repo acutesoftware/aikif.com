@@ -15,18 +15,23 @@ This is an example framework to capture the flow of information initially for pe
 
 <H4>Diary Display (testing)</H4>
 <div id = "diary_day">
+<TABLE>
 {% for day in events %}
-  <div id = "event_date">{{ day['date'] }}</div>
-  <TABLE>
+  
+  <TR>
+    <TD colspan=3><div id = "event_date">{{ day['date'] }}</div></TD>
+  </TR>
   {% for event in day['event'] %}
     <TR>
-    <TD><div id = "event_time">{{ event['time'] }}</div></TD>
-    <TD><div id = "event_details">{{ event['details'] }}</div></TD>
+      <TD>&nbsp;</TD>
+      <TD><div id = "event_time">{{ event['time'] }}</div></TD>
+      <TD><div id = "event_details">{{ event['details'] }}</div></TD>
     </TR>
   {% endfor %}
-  </TABLE>
+  
   </div>
 {% endfor %}
+</TABLE>
 </div>
 
 
