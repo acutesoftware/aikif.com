@@ -181,6 +181,19 @@ pre {
 
 #diary_event {
     background-color: #EEF7EE;
+    border: solid 1px #DDEEEE;
+}
+
+#event_date {
+    color: red;
+}
+
+#event_time {
+    color: blue;
+}
+
+#event_details {
+    color: green;
 }
 
 
