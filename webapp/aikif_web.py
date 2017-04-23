@@ -430,21 +430,24 @@ def get_events():
         },
     ]
     
-    print(events)
+    #print(events)
     
-    print("event[0] = ", events[0])
-    print("event[0]['event'][0] = ", events[0]['event'][0])
-    print(" events[1]['event'] = ", events[1]['event'])
+    #print("event[0] = ", events[0])
+    #print("event[0]['event'][0] = ", events[0]['event'][0])
+    #print(" events[1]['event'] = ", events[1]['event'])
     
     return events
     
     
 @app.route("/about")
 def page_about():
-    
+    import events
+    e = events.Events()
+    all_events = e.parse_events_for_web(e.get_events())
+    print('all_events (beta) = ', all_events)
     return render_template('about.html',
-                    username = get_user(),
-                    events = get_events(),
+                    username = get_user(), #  events = all_events, # use this once events.py is working       
+                    events = get_events(),           
                     logged_on=am_i_authenticated())
 
 
