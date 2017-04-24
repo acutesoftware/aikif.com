@@ -185,15 +185,15 @@ pre {
 }
 
 #event_date {
-    color: red;
+    color: dark-gray;
 }
 
 #event_time {
-    color: blue;
+    color: light-gray;
 }
 
 #event_details {
-    color: green;
+    color: black;
 }
 
 
@@ -255,6 +255,24 @@ TD {
   vertical-align:middle;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #C1C3D1;
+}
+
+
+#event_date {
+    color: DarkGrey ;
+    background:White;
+  	font-size: 150%;
+
+}
+
+#event_time {
+    color: LightGrey ;
+    background:White;
+}
+
+#event_details {
+    color: black;
+    background:White;
 }
 
 #login {
