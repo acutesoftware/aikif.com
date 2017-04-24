@@ -19,11 +19,10 @@ This is an example framework to capture the flow of information initially for pe
 {% for day in events %}
   
   <TR>
-    <TD colspan=3><div id = "event_date">{{ day['date'] }}</div></TD>
+    <TD colspan=2><div id = "event_date">{{ day['date'] }}</div></TD>
   </TR>
   {% for event in day['event'] %}
     <TR>
-      <TD>&nbsp;</TD>
       <TD><div id = "event_time">{{ event['time'] }}</div></TD>
       <TD><div id = "event_details">{{ event['details'] }}</div></TD>
     </TR>
