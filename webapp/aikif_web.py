@@ -417,12 +417,12 @@ def page_programs_rebuild():
     
 def get_events():    
     events = [
-        {'date':'20170417', 'event':[
+        {'date':'Sat 22nd April 2017', 'event':[
             {'time':'0900', 'details':'Initial Version'},
             {'time':'1100', 'details':'Update with database'},
             ]
         },
-        {'date':'20170422', 'event':[
+        {'date':'Mon 24th April 2017', 'event':[
             {'time':'0930', 'details':'bug fixes'},
             {'time':'1130', 'details':'more fixes'},
             {'time':'1400', 'details':'calendar page'},
