@@ -257,6 +257,18 @@ TD {
   border-right: 1px solid #C1C3D1;
 }
 
+#diary_day {
+    float: center; 
+	width: 600px;    
+}
+
+
+#diary_timeslot {
+    float: center; 
+    width: 100%;    
+    color: Red ;
+}
+
 
 #event_date {
     color: White ;
@@ -266,11 +278,13 @@ TD {
 }
 
 #event_time {
+    float: left; 
     color: DarkGrey ;
     background:White;
 }
 
 #event_details {
+    float: right; 
     color: black;
     background:White;
 }
