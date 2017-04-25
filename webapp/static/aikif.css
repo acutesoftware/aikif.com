@@ -259,14 +259,14 @@ TD {
 
 
 #event_date {
-    color: DarkGrey ;
-    background:White;
+    color: White ;
+    background:DarkGrey;
   	font-size: 150%;
 
 }
 
 #event_time {
-    color: LightGrey ;
+    color: DarkGrey ;
     background:White;
 }
 
