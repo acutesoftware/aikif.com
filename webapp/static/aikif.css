@@ -259,7 +259,8 @@ TD {
 
 #diary_day {
     float: center; 
-	width: 600px;    
+	width: 900px;   
+    
 }
 
 
@@ -267,6 +268,7 @@ TD {
     float: center; 
     width: 100%;    
     color: Red ;
+    box-sizing: border-box;
 }
 
 
