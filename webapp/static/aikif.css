@@ -281,7 +281,7 @@ TD {
 
 #event_time {
     float: left; 
-    width: 100px; 
+    width: 50px; 
     color: DarkGrey ;
     background:White;
 }
@@ -289,7 +289,7 @@ TD {
 #event_details {
     float: right; 
     color: black;
-    width: 80%;    
+    width: 90%;    
     background:White;
 }
 
