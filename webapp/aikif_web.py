@@ -455,7 +455,9 @@ def page_about():
     import events
     import pprint
     e = events.Events()
-    all_events = e.parse_events_for_web(e.get_events())
+    #all_events = e.parse_events_as_list(e.get_events())
+    all_events = e.parse_events_as_day(e.get_events())
+    
     pprint.pprint(all_events)
     return render_template('about.html',
                     username = get_user(), #  
