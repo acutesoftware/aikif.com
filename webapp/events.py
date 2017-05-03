@@ -52,11 +52,12 @@ class Events(object):
         for day in unique_days:  # what the hell - use something better
             cur_event = {}
             cur_event['date'] = day
+            cur_event['event'] = []
+            days_events = []
             for e in events:
-                days_events = []
                 if e[0] == day:
-                    cur_event['event'] = {'time': e[1], 'details': e[2]}
-                    days_events.append(cur_event)
+                    cur_event['event'].append( {'time': e[1], 'details': e[2]})
+            days_events.append(cur_event)
                     
-            res.append(days_events)
+            res.append(cur_event)
         return res
