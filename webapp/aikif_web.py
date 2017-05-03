@@ -415,7 +415,18 @@ def page_programs_rebuild():
     return 'todo'
 
     
-def get_events():    
+def get_events():   
+    """
+    [
+     {'date': '20170417',
+      'event': [{'details': 'Initial Version', 'time': '0900'},
+                {'details': 'Update with database', 'time': '1100'}]},
+      {'date': '20170422',
+      'event': [{'details': 'bug fixes', 'time': '0930'},
+                {'details': 'more fixes', 'time': '1130'},
+                {'details': 'calendar page', 'time': '1400'}]}
+    ]
+    """
     events = [
         {'date':'Sat 22nd April 2017', 'event':[
             {'time':'0900', 'details':'Initial Version'},
@@ -442,12 +453,13 @@ def get_events():
 @app.route("/about")
 def page_about():
     import events
+    import pprint
     e = events.Events()
     all_events = e.parse_events_for_web(e.get_events())
-    print('all_events (beta) = ', all_events)
+    pprint.pprint(all_events)
     return render_template('about.html',
-                    username = get_user(), #  events = all_events, # use this once events.py is working       
-                    events = get_events(),           
+                    username = get_user(), #  
+                    events = all_events, # use this once events.py is working     events = get_events(),           
                     logged_on=am_i_authenticated())
 
 
