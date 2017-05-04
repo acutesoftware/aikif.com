@@ -15,11 +15,11 @@ class Events(object):
         (currently just returns test data)
         """
         events = [
-            ['20170417', '0900', 'Initial Version'],
-            ['20170417', '1100', 'Update with database'],
-            ['20170422', '0930', 'bug fixes'],
-            ['20170422', '1130', 'more fixes'],
-            ['20170422', '1400', 'calendar page'],
+            ['Fri, 5th May 2017', '0900', 'Initial Version'],
+            ['Fri, 5th May 2017', '1100', 'Update with database'],
+            ['Sat, 6th May 2017', '0930', 'bug fixes'],
+            ['Sat, 6th May 2017', '1130', 'more fixes'],
+            ['Sat, 6th May 2017', '1400', 'calendar page'],
             ]
         print(events)
         return events
