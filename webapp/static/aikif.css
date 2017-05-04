@@ -268,10 +268,10 @@ TD {
     float: center; 
     width: 100%;    
     box-sizing: border-box;
-    padding: 5px 10px 2px 2px;
-    border-width: 1px 1px 1px 5px;
-    border: 1px dotted grey;
-}
+    --height: 15px;
+    padding: 5px 0px 2px 2px;
+    border-width: 1px 1px 1px 1px;
+    }
 
 
 #event_date {
