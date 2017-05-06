@@ -313,7 +313,7 @@ def add_data():
             rows_to_load = web.read_csv_to_list(dest_file)
         
             #real_col_list, msg = web.load_csv_to_stage(listname, rows_to_load, conn_str)
-            flash('Loaded ' + name)
+            flash('Loaded ' + dest_file)
             
         except Exception as ex:
             flash('Error loading file - is it a valid CSV file?' + str(ex))
