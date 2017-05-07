@@ -39,15 +39,6 @@ DATABASE_DDL = 'schema_sqlite.sql'
 app = Flask(__name__)
 
 
-menu = [
-    ['/',        'Home',     'This is the admin web interface for AIKIF (Artificial Intelligence Knowledge Information Framework)'],
-    ['/data',    'Data',     'Shows the available data sets for AIKIF'],
-    ['/projects',    'Projects',     'Manage projects'],
-    ['/agents',  'Agents',   'Describes the agents capabilities, and last run status'],
-    ['/programs','Programs', 'Details of the modules in AIKIF'],
-    ['/about',   'About',    'About AIKIF and author contact']
-    ]
-
 
 ###### DATABASE #####
 
