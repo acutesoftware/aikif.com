@@ -20,10 +20,11 @@ class aikif_web_Test(unittest.TestCase):
     def tearDown(self):
         unittest.TestCase.tearDown(self)
  
-    def test_02_page_home(self):
+    def test_03_search_post(self):
         import aikif_web
-        res = aikif_web.page_home()
+        res = aikif_web.search_post()
         print(res)
+        self.assertEqual(res , 'todo') 
 
     def test_08_events(self):
         # locks, so dont do this - aikif_web.start_server()
