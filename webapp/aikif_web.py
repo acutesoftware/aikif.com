@@ -320,6 +320,10 @@ def add_data():
             return render_template('data.html')
                            
         #staging table now loaded, so call PLSQL to run the job to process list    
+        # TODO - sql_str = "INSERT INTO CORE_FACTS ('NAME','KEY','VALUE') VALUES (?,?,?)"
+        # insert_db(sql_str, editedinfo)
+        flash('TODO - read file - need to load ' + str(len(rows_to_load)) + ' rows ')
+        
         
     return render_template('data.html',
                    data=get_data_list(),
@@ -331,11 +335,6 @@ def add_data():
  
 @app.route("/data/<dataFile>", methods=['GET'])
 def page_data_show(dataFile):
-    print('page_data_show(dataFile)' , dataFile)
-    # first step is to read the datatable (for now, just a hard coded table
-    #res = query_db('select * from CORE_FACTS')
-    #print('res = ' , res)
-    
     return render_template('data.html',
                            data=get_data_list(),
                            rows = query_db('select * from CORE_FACTS'),
