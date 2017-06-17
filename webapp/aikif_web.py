@@ -9,7 +9,7 @@ print ("os.getcwd() = ", os.getcwd())
 
 #AIKIF_WEB_VERSION = "PROD"
 AIKIF_WEB_VERSION = "DEV"
-AIKIF_VERSION_NUM = "Version 0.2.2 (alpha) - updated 6-Apr-2017"
+AIKIF_VERSION_NUM = "Version 0.2.3 (alpha) - updated 16-Jun-2017"
 
 
 
@@ -34,6 +34,12 @@ import sqlite3
   
 import logging
 from logging.handlers import RotatingFileHandler
+
+# get local versions of libraries
+root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".."  + os.sep + ".." ) 
+pth = os.path.join(root_folder, 'AIKIF') # , 'aikif')
+
+sys.path.append(pth)
 
 from aikif import core_data   
 
@@ -210,6 +216,7 @@ def am_i_authenticated():
 def page_home():
     #user = g.user
     return render_template('index.html', 
+        submenu = get_sub_menu(),
         username = get_user(),
         logged_on=am_i_authenticated())
 
@@ -220,6 +227,16 @@ def search_post():
     return 'todo'
  
 
+
+def get_sub_menu():
+    import yaml
+    root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + ".." ) 
+    data_path = os.path.join(root_folder, 'AIKIF', 'aikif', 'data', 'core')
+    yaml_file = os.path.join(data_path, 'root.yaml')
+    with open(yaml_file, 'r') as stream:
+        yaml_data =  yaml.load(stream)
+
+    return yaml_data
 
 def get_data_list():
     return core_data.core_data_types
