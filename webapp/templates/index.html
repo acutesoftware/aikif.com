@@ -9,8 +9,17 @@
     </ul>
     </div>
 
+
+<div id="submenu"><ul>
+{% for row in submenu %}
+    <li>{{ row }}</li>
+{% endfor %}
+</ul></div>
+
 <H1>AIKIF Home</H1>
 <H4>Project overview showing current list of tasks being worked on</H4>
+
+
 <form action="." method="POST">
   <input type="text" name="search_text">
   <input type="submit" name="my-form" value="Search">
