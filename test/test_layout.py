@@ -26,7 +26,7 @@ class TestLayout(unittest.TestCase):
         """
         read the yaml file - example for use is in comments below
         """
-        self.assertEqual(len(yaml_data), 4)
+        self.assertEqual(len(yaml_data), 5)
 
     
     def test_02_screen(self):
